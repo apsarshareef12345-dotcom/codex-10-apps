@@ -1,0 +1,1 @@
+@import url("../../shared.css");.clock{text-align:center;font-size:72px;font-weight:800;letter-spacing:-3px}.settings{grid-template-columns:repeat(3,1fr)}@media(max-width:600px){.settings{grid-template-columns:1fr}}

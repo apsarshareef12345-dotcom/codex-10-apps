@@ -1,0 +1,1 @@
+@import url("../../shared.css");.passage{font-size:20px;line-height:1.9;letter-spacing:.2px}.passage span.good{color:var(--good)}.passage span.bad{color:#fff;background:var(--danger);border-radius:3px}.scores{grid-template-columns:repeat(3,1fr)}.score{font-size:30px;font-weight:800}@media(max-width:600px){.scores{grid-template-columns:1fr}}

@@ -1,0 +1,1 @@
+@import url("../../shared.css");.weather{font-size:38px;font-weight:800}.forecast{grid-template-columns:repeat(5,1fr)}@media(max-width:700px){.forecast{grid-template-columns:repeat(2,1fr)}}

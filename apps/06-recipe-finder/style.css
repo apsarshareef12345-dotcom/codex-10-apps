@@ -1,0 +1,1 @@
+@import url("../../shared.css");.recipes{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}.recipe h3{margin:.3rem 0}.servings{font-size:22px;font-weight:800}
