@@ -1,1 +1,100 @@
-const key='expenses.data';let data=JSON.parse(localStorage.getItem(key)||'{"budget":2000,"items":[]}');const money=n=>'$'+Number(n).toFixed(2),save=()=>localStorage.setItem(key,JSON.stringify(data));function render(){budget.value=data.budget;let total=data.items.reduce((s,x)=>s+x.amount,0);b.textContent=money(data.budget);spent.textContent=money(total);balance.textContent=money(data.budget-total);let cats={};data.items.forEach(x=>cats[x.category]=(cats[x.category]||0)+x.amount);chart.innerHTML=Object.entries(cats).map(x=>'<p>'+x[0]+' · '+money(x[1])+'<span class="bar"><i style="width:'+Math.min(100,x[1]/data.budget*100)+'%"></i></span></p>').join('')||'<p class="empty">No expenses yet</p>';list.innerHTML=data.items.map(x=>'<div class="item"><span>'+x.name+' <small class="muted">'+x.category+'</small></span><span>'+money(x.amount)+' <button class="danger del" data-id="'+x.id+'">×</button></span></div>').join('');document.querySelectorAll('.del').forEach(x=>x.onclick=()=>{data.items=data.items.filter(i=>i.id!=x.dataset.id);save();render()})}budgetForm.onsubmit=e=>{e.preventDefault();data.budget=+budget.value;save();render()};form.onsubmit=e=>{e.preventDefault();data.items.unshift({id:Date.now(),name:name.value,amount:+amount.value,category:category.value});save();form.reset();render()};render();
+const key = 'expenses.data';
+
+const budgetForm = document.getElementById('budgetForm');
+const budgetInput = document.getElementById('budget');
+const expenseForm = document.getElementById('form');
+const nameInput = document.getElementById('name');
+const amountInput = document.getElementById('amount');
+const categoryInput = document.getElementById('category');
+
+const budgetTotal = document.getElementById('b');
+const spentTotal = document.getElementById('spent');
+const balanceTotal = document.getElementById('balance');
+const chart = document.getElementById('chart');
+const list = document.getElementById('list');
+
+let data = JSON.parse(
+  localStorage.getItem(key) || '{"budget":2000,"items":[]}'
+);
+
+const money = number => '$' + Number(number).toFixed(2);
+
+function save() {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function render() {
+  budgetInput.value = data.budget;
+
+  const total = data.items.reduce((sum, item) => sum + item.amount, 0);
+
+  budgetTotal.textContent = money(data.budget);
+  spentTotal.textContent = money(total);
+  balanceTotal.textContent = money(data.budget - total);
+
+  const categories = {};
+
+  data.items.forEach(item => {
+    categories[item.category] = (categories[item.category] || 0) + item.amount;
+  });
+
+  chart.innerHTML =
+    Object.entries(categories)
+      .map(item =>
+        '<p>' +
+        item[0] +
+        ' · ' +
+        money(item[1]) +
+        '<span class="bar"><i style="width:' +
+        Math.min(100, (item[1] / Math.max(1, data.budget)) * 100) +
+        '%"></i></span></p>'
+      )
+      .join('') || '<p class="empty">No expenses yet</p>';
+
+  list.innerHTML = data.items
+    .map(
+      item =>
+        '<div class="item"><span>' +
+        item.name +
+        ' <small class="muted">' +
+        item.category +
+        '</small></span><span>' +
+        money(item.amount) +
+        ' <button class="danger del" data-id="' +
+        item.id +
+        '">×</button></span></div>'
+    )
+    .join('');
+
+  document.querySelectorAll('.del').forEach(button => {
+    button.onclick = () => {
+      data.items = data.items.filter(item => item.id != button.dataset.id);
+      save();
+      render();
+    };
+  });
+}
+
+budgetForm.onsubmit = event => {
+  event.preventDefault();
+  data.budget = Math.max(0, Number(budgetInput.value) || 0);
+  save();
+  render();
+};
+
+expenseForm.onsubmit = event => {
+  event.preventDefault();
+
+  data.items.unshift({
+    id: Date.now(),
+    name: nameInput.value,
+    amount: Number(amountInput.value),
+    category: categoryInput.value
+  });
+
+  save();
+  expenseForm.reset();
+  render();
+};
+
+render();
