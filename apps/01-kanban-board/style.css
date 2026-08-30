@@ -1,92 +1,42 @@
-body {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background: linear-gradient(135deg, #eef3ff, #fdf1ff 55%, #e5f7ff);
+@import url("../../shared.css");
+
+.board {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  z-index: 0;
-  right: -85px;
-  top: 75px;
-  width: 255px;
-  height: 255px;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fffdf2 0 5%,
-      #e4dfc6 19%,
-      #9ca0aa 52%,
-      #515873 79%,
-      #29304b
-    );
-  box-shadow:
-    inset -26px -22px 38px #262b4f99,
-    inset 12px 12px 18px #fff9,
-    0 0 48px #a5b7ff99;
-  animation: float-moon 9s ease-in-out infinite;
+.column {
+  background: #edf0f7;
+  border-radius: 14px;
+  padding: 12px;
+  min-height: 300px;
 }
 
-body::after {
-  content: "✦   ·      ✧        ·   ✦        ·      ✧";
-  white-space: pre;
-  position: fixed;
-  z-index: 0;
-  inset: 0;
-  color: #8296de99;
-  font-size: 25px;
-  letter-spacing: 4vw;
-  line-height: 19vh;
-  pointer-events: none;
-  animation: drift-stars 18s linear infinite;
+.task {
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 9px 0;
+  box-shadow: 0 2px 8px #0000000d;
+  cursor: grab;
 }
 
-.top,
-.wrap {
-  position: relative;
-  z-index: 1;
+.high {
+  background: #fff0f1;
+  color: #d63345;
 }
 
-.top {
-  background: linear-gradient(110deg, #171b35, #403da3);
-  box-shadow: 0 6px 20px #28307533;
+.medium {
+  background: #fff7dc;
+  color: #9a6700;
 }
 
-.card {
-  background: #fffffff0;
-  border-color: white;
-}
-
-@keyframes float-moon {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-6deg);
-  }
-
-  50% {
-    transform: translateY(20px) rotate(7deg);
-  }
-}
-
-@keyframes drift-stars {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-19vh);
-  }
+.low {
+  background: #e7faf0;
+  color: #15734e;
 }
 
 @media (max-width: 700px) {
-  body::before {
-    width: 160px;
-    height: 160px;
-    right: -55px;
-    top: 58px;
+  .board {
+    grid-template-columns: 1fr;
   }
 }
