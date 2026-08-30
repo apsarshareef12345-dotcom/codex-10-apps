@@ -193,6 +193,39 @@
       68% { opacity: 1; }
       82%, 100% { opacity: 0; transform: translate(65vw, 38vh) rotate(-25deg); }
     }
+    .launch-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 5px 0 #0004, 0 0 14px currentColor;
+  transition: transform .2s, filter .2s;
+}
+
+.group:hover .launch-button {
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.15);
+}
+
+.launch-button::before {
+  content: "🚀";
+  font-size: 15px;
+}
+
+.mission-1 { background: #7c3aed; }
+.mission-2 { background: #2563eb; }
+.mission-3 { background: #db2777; }
+.mission-4 { background: #0891b2; }
+.mission-5 { background: #ea580c; }
+.mission-6 { background: #16a34a; }
+.mission-7 { background: #a16207; }
+.mission-8 { background: #4f46e5; }
+.mission-9 { background: #be123c; }
+.mission-10 { background: #0f766e; }
   </style>
 </head>
 
