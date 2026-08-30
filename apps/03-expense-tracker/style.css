@@ -1,9 +1,28 @@
+:root {
+  --bg: #eaf0ff;
+  --card: #fffffff0;
+  --ink: #182033;
+  --muted: #65708a;
+  --brand: #5b56e8;
+  --line: #e4e7ef;
+  --good: #18a870;
+  --danger: #e5484d;
+  --shadow: 0 12px 32px #20285512;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   position: relative;
   isolation: isolate;
+  margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
   background: linear-gradient(135deg, #eef3ff, #fdf1ff 55%, #e5f7ff);
+  color: var(--ink);
+  font: 15px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 body::before {
@@ -51,14 +70,116 @@ body::after {
   z-index: 1;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+  padding: 0.65rem 0.9rem;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+}
+
+button.ghost {
+  background: #eef0ff;
+  color: var(--brand);
+}
+
+button.danger {
+  background: #fff0f1;
+  color: var(--danger);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0.65rem;
+  background: #fff;
+  color: var(--ink);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 .top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 5%;
   background: linear-gradient(110deg, #171b35, #403da3);
+  color: white;
   box-shadow: 0 6px 20px #28307533;
 }
 
+.top a {
+  color: #c9c8ff;
+  text-decoration: none;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 20px;
+}
+
 .card {
-  background: #fffffff0;
-  border-color: white;
+  padding: 18px;
+  border: 1px solid white;
+  border-radius: 15px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.empty {
+  padding: 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.pill {
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: #eeeefd;
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes float-moon {
@@ -82,11 +203,30 @@ body::after {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
 @media (max-width: 700px) {
   body::before {
     width: 160px;
     height: 160px;
     right: -55px;
     top: 58px;
+  }
+
+  .wrap {
+    padding: 18px 12px;
+  }
+
+  .top {
+    padding: 12px;
+  }
+
+  .row > * {
+    flex: 1 1 auto;
   }
 }
