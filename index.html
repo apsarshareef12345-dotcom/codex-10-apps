@@ -27,13 +27,15 @@
       z-index: 0;
     }
 
-    .stars, .stars::before, .stars::after {
+    .stars,
+    .stars::before,
+    .stars::after {
       position: absolute;
       inset: 0;
       content: "";
       width: 2px;
       height: 2px;
-      background: #fff;
+      background: white;
       box-shadow:
         8vw 11vh #fff9, 16vw 31vh #a8c6ff, 25vw 8vh #fff,
         33vw 62vh #fff8, 42vw 19vh #cdbaff, 53vw 47vh #fff,
@@ -60,4 +62,191 @@
       position: absolute;
       right: clamp(-55px, 4vw, 70px);
       top: 42px;
-      width: clamp(210px, 
+      width: clamp(210px, 28vw, 350px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 28%, #fffbe8 0 4%, #e6e2c9 18%, #a5a38f 53%, #6a6b6b 77%, #33384d 100%);
+      box-shadow:
+        inset -38px -26px 55px #1b234ccc,
+        inset 12px 12px 20px #fff8,
+        0 0 55px #dce6ff6e;
+      animation: moon-float 8s ease-in-out infinite;
+    }
+
+    .moon::before,
+    .moon::after,
+    .crater {
+      position: absolute;
+      border-radius: 50%;
+      background: #777b7ba8;
+      box-shadow: inset 4px 4px 7px #343b4d, 1px 2px 4px #fff5;
+    }
+
+    .moon::before,
+    .moon::after {
+      content: "";
+    }
+
+    .moon::before {
+      width: 24%;
+      height: 24%;
+      top: 50%;
+      left: 22%;
+    }
+
+    .moon::after {
+      width: 16%;
+      height: 16%;
+      top: 20%;
+      right: 23%;
+    }
+
+    .crater.one {
+      width: 12%;
+      height: 12%;
+      top: 37%;
+      right: 19%;
+    }
+
+    .crater.two {
+      width: 9%;
+      height: 9%;
+      bottom: 18%;
+      left: 47%;
+    }
+
+    .crater.three {
+      width: 7%;
+      height: 7%;
+      top: 15%;
+      left: 42%;
+    }
+
+    .satellite {
+      position: absolute;
+      right: 29vw;
+      top: 15vh;
+      width: 28px;
+      height: 14px;
+      background: #f6d98a;
+      border-radius: 4px;
+      box-shadow: 0 0 12px #ffe6a1aa;
+      animation: orbit 15s linear infinite;
+    }
+
+    .satellite::before,
+    .satellite::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      width: 27px;
+      height: 10px;
+      background: linear-gradient(90deg, #4895e9, #1e438e);
+      border: 1px solid #9bd5ff;
+    }
+
+    .satellite::before { right: 29px; }
+    .satellite::after { left: 29px; }
+
+    .shooting {
+      position: absolute;
+      left: 9%;
+      top: 20%;
+      width: 110px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #9fe7ff, #fff);
+      filter: drop-shadow(0 0 5px #8ddaff);
+      animation: shoot 7s ease-in infinite;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-card {
+      background: linear-gradient(145deg, #172247e6, #0b1230e6);
+      box-shadow: 8px 10px 24px #0007, inset 1px 1px #ffffff18;
+    }
+
+    .app-card:hover {
+      box-shadow: 0 0 0 1px #a5b4fc, 0 17px 35px #1b2f9c66;
+    }
+
+    @keyframes moon-float {
+      0%, 100% { transform: perspective(700px) rotateY(-11deg) rotateX(3deg) translateY(0); }
+      50% { transform: perspective(700px) rotateY(9deg) rotateX(-3deg) translateY(16px); }
+    }
+
+    @keyframes twinkle {
+      to { opacity: .25; transform: scale(1.8); }
+    }
+
+    @keyframes orbit {
+      0%, 100% { transform: rotate(-25deg) translateX(0); }
+      50% { transform: rotate(-12deg) translate(-45px, 40px); }
+    }
+
+    @keyframes shoot {
+      0%, 63% { opacity: 0; transform: translate(0, 0) rotate(-25deg); }
+      68% { opacity: 1; }
+      82%, 100% { opacity: 0; transform: translate(65vw, 38vh) rotate(-25deg); }
+    }
+  </style>
+</head>
+
+<body class="text-slate-100">
+  <div class="space-scene" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="shooting"></div>
+    <div class="satellite"></div>
+
+    <div class="moon">
+      <i class="crater one"></i>
+      <i class="crater two"></i>
+      <i class="crater three"></i>
+    </div>
+  </div>
+
+  <main class="page mx-auto max-w-7xl px-6 py-14">
+    <p class="text-sm font-semibold tracking-widest text-indigo-300">
+      TEN APP SPACE STATION
+    </p>
+
+    <h1 class="mt-3 max-w-3xl text-4xl font-bold md:text-6xl">
+      Choose your next mission.
+    </h1>
+
+    <p class="mt-5 max-w-2xl text-lg text-slate-300">
+      Explore ten useful tools. Your progress stays safely in your browser.
+    </p>
+
+    <div id="apps" class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </main>
+
+  <script>
+    const apps = [
+      ['01-kanban-board', 'Kanban Task Board', 'Organize priorities through a visual workflow.'],
+      ['02-markdown-editor', 'Markdown Editor', 'Write, preview and export Markdown notes.'],
+      ['03-expense-tracker', 'Expense Tracker', 'Track budget, spending and category totals.'],
+      ['04-weather-dashboard', 'Weather Dashboard', 'Search live conditions and a five-day outlook.'],
+      ['05-pomodoro-timer', 'Pomodoro Timer', 'Focus with configurable work and break sessions.'],
+      ['06-recipe-finder', 'Recipe Finder', 'Search recipes and scale serving sizes.'],
+      ['07-habit-tracker', 'Habit Tracker', 'Build daily streaks with a 21-day matrix.'],
+      ['08-code-snippet-manager', 'Snippet Manager', 'Save, tag and copy useful code.'],
+      ['09-typing-speed-test', 'Typing Speed Test', 'Measure speed, accuracy and mistakes.'],
+      ['10-drawing-canvas', 'Drawing Canvas', 'Sketch, undo and download as PNG.']
+    ];
+
+    document.getElementById('apps').innerHTML = apps.map((app, index) =>
+      '<a href="apps/' + app[0] + '/" class="app-card group rounded-2xl border border-slate-700/80 p-6 transition hover:-translate-y-1">' +
+      '<span class="text-indigo-300">0' + (index + 1) + '</span>' +
+      '<h2 class="mt-5 text-xl font-bold group-hover:text-indigo-300">' + app[1] + '</h2>' +
+      '<p class="mt-2 text-slate-300">' + app[2] + '</p>' +
+      '<span class="mt-5 inline-block font-semibold text-indigo-300">Start mission →</span>' +
+      '</a>'
+    ).join('');
+  </script>
+</body>
+</html>
