@@ -1,1 +1,121 @@
-const key='pomo.state',workEl=document.getElementById('work'),breakEl=document.getElementById('break');let s=JSON.parse(localStorage.getItem(key)||'{"work":25,"break":5,"done":0,"logs":[]}'),remaining=s.work*60,running=false,timer;workEl.value=s.work;breakEl.value=s.break;function save(){localStorage.setItem(key,JSON.stringify(s))}function render(){let m=Math.floor(remaining/60),sec=remaining%60;clock.textContent=m+':'+String(sec).padStart(2,'0');sessions.textContent=s.done;log.innerHTML=s.logs.slice(0,8).map(x=>'<p class="muted">'+x+'</p>').join('')||'<p class="muted">No completed sessions yet.</p>'}function end(){clearInterval(timer);running=false;start.textContent='Start';s.done++;s.logs.unshift(new Date().toLocaleString()+' — focus session complete');save();remaining=s.break*60;mode.textContent='Break time';try{new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=').play()}catch(e){}render()}start.onclick=()=>{running=!running;start.textContent=running?'Pause':'Start';if(running)timer=setInterval(()=>{if(--remaining<=0)end();render()},1000);else clearInterval(timer)};reset.onclick=()=>{clearInterval(timer);running=false;start.textContent='Start';remaining=(+workEl.value||25)*60;mode.textContent='Focus time';render()};[workEl,breakEl].forEach(x=>x.onchange=()=>{s.work=+workEl.value;s.break=+breakEl.value;save();reset.click()});render();
+const storageKey = 'pomo.state';
+
+const modeLabel = document.getElementById('mode');
+const clock = document.getElementById('clock');
+const startButton = document.getElementById('start');
+const resetButton = document.getElementById('reset');
+const workInput = document.getElementById('work');
+const breakInput = document.getElementById('break');
+const sessionsValue = document.getElementById('sessions');
+const logElement = document.getElementById('log');
+
+let state = JSON.parse(
+  localStorage.getItem(storageKey) ||
+    '{"work":25,"break":5,"done":0,"logs":[]}'
+);
+
+let currentMode = 'focus';
+let remaining = state.work * 60;
+let running = false;
+let timerId = null;
+
+function save() {
+  localStorage.setItem(storageKey, JSON.stringify(state));
+}
+
+function render() {
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+
+  clock.textContent = minutes + ':' + String(seconds).padStart(2, '0');
+  modeLabel.textContent = currentMode === 'focus' ? 'Focus time' : 'Break time';
+  sessionsValue.textContent = state.done;
+  startButton.textContent = running ? 'Pause' : 'Start';
+
+  logElement.innerHTML =
+    state.logs
+      .slice(0, 8)
+      .map(item => '<p class="muted">' + item + '</p>')
+      .join('') ||
+    '<p class="muted">No completed focus sessions yet.</p>';
+}
+
+function playAlert() {
+  if (navigator.vibrate) {
+    navigator.vibrate([120, 70, 120]);
+  }
+}
+
+function finishRound() {
+  playAlert();
+
+  if (currentMode === 'focus') {
+    state.done++;
+    state.logs.unshift(
+      new Date().toLocaleString() + ' — focus session complete'
+    );
+
+    currentMode = 'break';
+    remaining = state.break * 60;
+  } else {
+    currentMode = 'focus';
+    remaining = state.work * 60;
+  }
+
+  save();
+  render();
+}
+
+function tick() {
+  if (remaining <= 1) {
+    clearInterval(timerId);
+    timerId = null;
+    running = false;
+    finishRound();
+    return;
+  }
+
+  remaining--;
+  render();
+}
+
+startButton.onclick = () => {
+  running = !running;
+
+  if (running) {
+    timerId = setInterval(tick, 1000);
+  } else {
+    clearInterval(timerId);
+    timerId = null;
+  }
+
+  render();
+};
+
+resetButton.onclick = () => {
+  clearInterval(timerId);
+  timerId = null;
+  running = false;
+  currentMode = 'focus';
+  remaining = state.work * 60;
+  render();
+};
+
+function saveSettings() {
+  state.work = Math.max(1, Number(workInput.value) || 25);
+  state.break = Math.max(1, Number(breakInput.value) || 5);
+
+  save();
+
+  if (!running) {
+    resetButton.click();
+  }
+}
+
+workInput.value = state.work;
+breakInput.value = state.break;
+
+workInput.onchange = saveSettings;
+breakInput.onchange = saveSettings;
+
+render();
