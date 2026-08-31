@@ -1,1 +1,66 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pomodoro Timer</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Pomodoro Timer</h1></header><main class="wrap" style="max-width:700px"><section class="card"><p id="mode" class="muted" style="text-align:center">Focus time</p><div id="clock" class="clock">25:00</div><div class="row" style="justify-content:center"><button id="start">Start</button><button class="ghost" id="reset">Reset</button></div></section><section class="grid settings" style="margin-top:18px"><label>Work minutes<input id="work" type="number" min="1" max="90"></label><label>Break minutes<input id="break" type="number" min="1" max="60"></label><label>Sessions done<div id="sessions" class="card">0</div></label></section><section class="card" style="margin-top:18px"><b>Session log</b><div id="log"></div></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Focus Galaxy Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="app">
+    <a class="hub-link" href="../../index.html">← Back to app hub</a>
+
+    <header>
+      <p class="eyebrow">FOCUS GALAXY</p>
+      <h1>Make your next focus mission count.</h1>
+      <p class="intro">
+        Work for a little while, take a healthy break, then come back even stronger.
+      </p>
+    </header>
+
+    <section class="timer-card">
+      <p id="mode" class="mode">Focus time</p>
+      <div id="clock" class="clock">25:00</div>
+
+      <div class="timer-actions">
+        <button id="start" class="primary">Start focus</button>
+        <button id="reset" class="secondary">Reset</button>
+      </div>
+    </section>
+
+    <section class="settings-card">
+      <label>
+        Work minutes
+        <input id="work" type="number" min="1" max="90">
+      </label>
+
+      <label>
+        Break minutes
+        <input id="break" type="number" min="1" max="60">
+      </label>
+
+      <div class="sessions">
+        <span>Sessions done</span>
+        <b id="sessions">0</b>
+        <small>focus missions completed</small>
+      </div>
+    </section>
+
+    <section class="log-card">
+      <div class="log-heading">
+        <div>
+          <p class="eyebrow">YOUR PROGRESS</p>
+          <h2>Session log</h2>
+        </div>
+        <button id="clearLog" class="text-button">Clear log</button>
+      </div>
+
+      <div id="log" class="log"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
