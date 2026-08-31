@@ -1,1 +1,108 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recipe Finder</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Recipe Finder & Calculator</h1></header><main class="wrap"><div class="card row"><input id="search" placeholder="Search by recipe or ingredient"><select id="filter"><option value="">All cuisines</option><option>Indian</option><option>Italian</option><option>Mexican</option><option>Asian</option></select></div><section id="recipes" class="grid recipes" style="margin-top:18px"></section><section id="detail" class="card hidden" style="margin-top:18px"></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Yum Quest Recipe Adventure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <main class="app-shell">
+    <header class="hero">
+      <a class="hub-link" href="../../index.html">← Back to app hub</a>
+
+      <div class="hero-copy">
+        <p class="eyebrow">YUM QUEST</p>
+        <h1>Cook, plan, and make every meal an adventure.</h1>
+        <p>
+          Find easy recipes, change serving sizes, save favourites,
+          and build your shopping list.
+        </p>
+      </div>
+
+      <div class="mascot" aria-hidden="true">🍳</div>
+    </header>
+
+    <section class="search-card">
+      <label class="search-box">
+        <span>⌕</span>
+        <input id="search" placeholder="Search a recipe or ingredient…">
+      </label>
+
+      <select id="filter">
+        <option value="">All recipe types</option>
+        <option value="Quick">Quick meals</option>
+        <option value="Vegetarian">Vegetarian</option>
+        <option value="Indian">Indian</option>
+        <option value="Italian">Italian</option>
+        <option value="Mexican">Mexican</option>
+        <option value="Asian">Asian</option>
+      </select>
+
+      <button id="showFavorites" class="soft-button">♡ My favourites</button>
+    </section>
+
+    <section class="feature-grid">
+      <article class="mini-feature">
+        <span>01</span>
+        <h2>Find a tasty recipe</h2>
+        <p>Search by food name or ingredients you already have at home.</p>
+      </article>
+
+      <article class="mini-feature">
+        <span>02</span>
+        <h2>Plan your week</h2>
+        <p>Save meals for later and make cooking feel easier every day.</p>
+      </article>
+
+      <article class="mini-feature">
+        <span>03</span>
+        <h2>Build your shopping list</h2>
+        <p>Add ingredients with one click, so nothing important is forgotten.</p>
+      </article>
+    </section>
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">RECIPE COLLECTION</p>
+        <h2>Pick your next yummy mission</h2>
+      </div>
+      <span id="recipeCount"></span>
+    </div>
+
+    <section id="recipes" class="recipe-grid"></section>
+
+    <section id="detail" class="recipe-detail hidden"></section>
+
+    <section class="bottom-grid">
+      <section class="side-card">
+        <div class="card-title">
+          <div>
+            <p class="eyebrow">SAVED FOR LATER</p>
+            <h2>Weekly meal plan</h2>
+          </div>
+          <span>📅</span>
+        </div>
+
+        <div id="mealPlan" class="meal-plan"></div>
+      </section>
+
+      <section class="side-card">
+        <div class="card-title">
+          <div>
+            <p class="eyebrow">READY TO SHOP</p>
+            <h2>Shopping list</h2>
+          </div>
+          <button id="clearShopping" class="text-button">Clear</button>
+        </div>
+
+        <div id="shoppingList" class="shopping-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
