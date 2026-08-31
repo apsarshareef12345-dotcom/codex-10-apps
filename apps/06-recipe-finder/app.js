@@ -1,112 +1,104 @@
-const STORAGE_KEY = 'yum-quest-data-v1';
+const STORAGE_KEY = 'quick-cook-shopping-list';
 
 const recipes = [
   {
-    id: 'veggie-sandwich',
+    id: 1,
     name: 'Grilled Veggie Sandwich',
-    cuisine: 'Indian',
-    type: 'Vegetarian',
     emoji: '🥪',
-    color: '#f29b63',
-    time: '15 min',
+    color: '#f4a261',
+    time: '15 minutes',
     servings: 2,
     ingredients: [
       '2 bread slices',
       '1/2 bell pepper',
       '1/4 onion',
       '1/2 tomato',
-      '1/2 zucchini',
       '2 cheese slices',
       '1 teaspoon butter'
     ],
     steps: [
-      'Wash and slice all the vegetables with help from an adult if needed.',
-      'Spread butter on the bread and add the vegetables and cheese.',
-      'Toast the sandwich in a pan until golden and the cheese melts.',
-      'Cut it in half and enjoy it while warm.'
+      'Cut the vegetables into small pieces.',
+      'Put butter on the bread.',
+      'Add vegetables and cheese between the bread slices.',
+      'Toast in a pan until the bread is golden.',
+      'Cut, serve, and enjoy.'
     ]
   },
   {
-    id: 'tomato-pasta',
+    id: 2,
     name: 'Creamy Tomato Pasta',
-    cuisine: 'Italian',
-    type: 'Quick',
     emoji: '🍝',
-    color: '#ec6f63',
-    time: '20 min',
+    color: '#ef7967',
+    time: '20 minutes',
     servings: 4,
     ingredients: [
       '2 cups pasta',
       '3 tomatoes',
       '2 garlic cloves',
       '1/2 cup cream',
-      '1/4 cup parmesan',
+      '1/4 cup cheese',
       '1 teaspoon herbs'
     ],
     steps: [
-      'Boil the pasta until soft, then carefully drain the water.',
-      'Cook garlic and tomatoes in a pan until the tomatoes become saucy.',
-      'Mix in cream, herbs, and cheese.',
-      'Add the pasta, stir well, and serve.'
+      'Boil pasta until soft, then drain the water.',
+      'Cook garlic and tomatoes in a pan.',
+      'Add cream, herbs, and cheese.',
+      'Mix the pasta into the sauce.',
+      'Serve warm.'
     ]
   },
   {
-    id: 'bean-tacos',
+    id: 3,
     name: 'Black Bean Tacos',
-    cuisine: 'Mexican',
-    type: 'Vegetarian',
     emoji: '🌮',
-    color: '#f4bd58',
-    time: '18 min',
+    color: '#f5c55d',
+    time: '18 minutes',
     servings: 3,
     ingredients: [
       '6 small tortillas',
       '1 cup black beans',
       '1/2 cup corn',
       '1 avocado',
-      '1 lime',
-      '1/2 tomato',
-      '1 teaspoon taco seasoning'
+      '1 tomato',
+      '1 lime'
     ],
     steps: [
-      'Warm the tortillas in a dry pan.',
-      'Heat beans, corn, and seasoning together.',
-      'Fill each tortilla with the bean mix, tomato, and avocado.',
-      'Add lime juice and enjoy.'
+      'Warm the tortillas in a pan.',
+      'Heat the beans and corn together.',
+      'Add beans into each tortilla.',
+      'Add tomato and avocado.',
+      'Squeeze lime on top and enjoy.'
     ]
   },
   {
-    id: 'noodle-bowl',
+    id: 4,
     name: 'Sesame Noodle Bowl',
-    cuisine: 'Asian',
-    type: 'Quick',
     emoji: '🍜',
-    color: '#b87edf',
-    time: '15 min',
+    color: '#b98be3',
+    time: '15 minutes',
     servings: 2,
     ingredients: [
       '2 noodle portions',
-      '1 teaspoon sesame oil',
       '1 carrot',
       '1/2 cucumber',
+      '1 teaspoon sesame oil',
       '1 tablespoon soy sauce',
       '1 teaspoon sesame seeds'
     ],
     steps: [
-      'Cook noodles and cool them for a moment.',
-      'Slice carrot and cucumber into thin strips.',
-      'Mix sesame oil and soy sauce in a bowl.',
-      'Toss everything together and sprinkle sesame seeds on top.'
+      'Cook the noodles and let them cool a little.',
+      'Cut carrot and cucumber into thin strips.',
+      'Mix sesame oil and soy sauce.',
+      'Mix noodles and vegetables together.',
+      'Add sesame seeds on top.'
     ]
   },
   {
-    id: 'fruit-yogurt',
-    name: 'Rainbow Yogurt Cup',
-    cuisine: 'Quick',
-    type: 'Vegetarian',
+    id: 5,
+    name: 'Fruit Yogurt Cup',
     emoji: '🍓',
-    color: '#ed83a8',
-    time: '5 min',
+    color: '#e98bad',
+    time: '5 minutes',
     servings: 2,
     ingredients: [
       '1 cup yogurt',
@@ -117,215 +109,166 @@ const recipes = [
       '2 tablespoons granola'
     ],
     steps: [
-      'Spoon yogurt into two cups.',
-      'Slice the fruit and place it on top in colorful rows.',
-      'Drizzle a little honey.',
-      'Add granola just before eating.'
+      'Put yogurt in a cup or bowl.',
+      'Cut the fruit into small pieces.',
+      'Place fruit on top of the yogurt.',
+      'Add honey and granola.',
+      'Eat right away.'
     ]
   },
   {
-    id: 'mini-pizza',
+    id: 6,
     name: 'Mini Veggie Pizza',
-    cuisine: 'Italian',
-    type: 'Quick',
     emoji: '🍕',
-    color: '#ee8d48',
-    time: '20 min',
+    color: '#ef9449',
+    time: '20 minutes',
     servings: 2,
     ingredients: [
       '2 pita breads',
       '4 tablespoons pizza sauce',
-      '1/2 cup mozzarella',
+      '1/2 cup mozzarella cheese',
       '1/2 bell pepper',
       '1/4 onion',
-      '1/2 teaspoon herbs'
+      '1 teaspoon herbs'
     ],
     steps: [
-      'Spread pizza sauce over each pita bread.',
-      'Add cheese and chopped vegetables.',
-      'Bake or cook in a covered pan until the cheese melts.',
-      'Sprinkle herbs and slice into small pieces.'
+      'Put pizza sauce on each pita bread.',
+      'Add cheese and vegetables.',
+      'Bake or cook in a covered pan.',
+      'Wait until cheese melts.',
+      'Cut into pieces and serve.'
     ]
   }
 ];
 
 const $ = (id) => document.getElementById(id);
 
-function load() {
+let selectedRecipe = null;
+
+function loadShopping() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (saved) {
-      return {
-        favourites: Array.isArray(saved.favourites) ? saved.favourites : [],
-        shopping: Array.isArray(saved.shopping) ? saved.shopping : [],
-        plan: Array.isArray(saved.plan) ? saved.plan : [],
-        nextDay: Number(saved.nextDay) || 0
-      };
-    }
-  } catch (error) {
-    console.warn('Could not load saved recipe data.', error);
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
   }
-
-  return {
-    favourites: [],
-    shopping: [],
-    plan: [],
-    nextDay: 0
-  };
 }
 
-let state = load();
-let favouritesOnly = false;
-let activeRecipe = null;
+let shopping = loadShopping();
 
-function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+function saveShopping() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(shopping));
 }
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>'"]/g, (character) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  })[character]);
-}
+function cleanWords(text) {
+  const ignoredWords = ['and', 'with', 'the', 'a', 'an'];
 
-function findRecipe(id) {
-  return recipes.find((recipe) => recipe.id === id);
+  return text
+    .toLowerCase()
+    .split(/[\s,]+/)
+    .filter((word) => word.length > 1 && !ignoredWords.includes(word));
 }
 
 function renderRecipes() {
-  const searchText = $('search').value.trim().toLowerCase();
-  const filter = $('filter').value;
+  const words = cleanWords($('search').value);
 
-  const filtered = recipes.filter((recipe) => {
-    const words = `${recipe.name} ${recipe.cuisine} ${recipe.type} ${recipe.ingredients.join(' ')}`.toLowerCase();
+  const results = recipes.filter((recipe) => {
+    const recipeText =
+      `${recipe.name} ${recipe.ingredients.join(' ')}`.toLowerCase();
 
-    const matchesSearch = !searchText || words.includes(searchText);
-    const matchesFilter =
-      !filter ||
-      recipe.cuisine === filter ||
-      recipe.type === filter;
-
-    const matchesFavourite =
-      !favouritesOnly || state.favourites.includes(recipe.id);
-
-    return matchesSearch && matchesFilter && matchesFavourite;
+    return words.every((word) => recipeText.includes(word));
   });
 
-  $('recipeCount').textContent =
-    `${filtered.length} recipe${filtered.length === 1 ? '' : 's'} found`;
+  $('count').textContent =
+    `${results.length} recipe${results.length === 1 ? '' : 's'} found`;
 
-  $('showFavorites').textContent =
-    favouritesOnly ? '← Show all recipes' : '♡ My favourites';
-
-  $('recipes').innerHTML = filtered.length
-    ? filtered
-        .map((recipe) => {
-          const saved = state.favourites.includes(recipe.id);
-
-          return `
-            <article class="recipe-card" style="--card-color:${recipe.color}">
-              <div class="recipe-emoji">${recipe.emoji}</div>
-              <h3>${recipe.name}</h3>
-              <p>${recipe.time} · Serves ${recipe.servings}</p>
-
-              <div class="tags">
-                <span class="tag">${recipe.cuisine}</span>
-                <span class="tag">${recipe.type}</span>
+  $('recipeList').innerHTML = results.length
+    ? results
+        .map(
+          (recipe) => `
+            <article class="recipe">
+              <div class="recipe-top" style="--recipe-color:${recipe.color}">
+                ${recipe.emoji}
               </div>
-
-              <div class="card-actions">
-                <button data-open="${recipe.id}">View recipe</button>
-                <button class="favourite" data-favourite="${recipe.id}">
-                  ${saved ? '♥ Saved' : '♡ Save'}
-                </button>
+              <div class="recipe-info">
+                <h3>${recipe.name}</h3>
+                <p>
+                  Ready in ${recipe.time}<br>
+                  Serves ${recipe.servings} people
+                </p>
+                <button data-recipe="${recipe.id}">Cook this recipe</button>
               </div>
             </article>
-          `;
-        })
+          `
+        )
         .join('')
-    : '<p class="empty">No recipe found. Try another food or ingredient.</p>';
+    : `
+      <p class="empty">
+        No recipe found. Try simple words like:
+        <b>bread tomato</b> or <b>pasta</b>.
+      </p>
+    `;
 }
 
-function scaledIngredient(ingredient, multiplier) {
-  if (multiplier === 1) return ingredient;
-  return `${multiplier.toFixed(2).replace(/\.00$/, '')}× ${ingredient}`;
-}
+function showRecipe(recipe) {
+  selectedRecipe = recipe;
 
-function renderDetail() {
-  if (!activeRecipe) {
-    $('detail').classList.add('hidden');
-    return;
-  }
+  $('recipeDetail').classList.remove('hidden');
 
-  const recipe = activeRecipe;
-  const saved = state.favourites.includes(recipe.id);
-
-  $('detail').classList.remove('hidden');
-
-  $('detail').innerHTML = `
-    <div class="detail-top">
+  $('recipeDetail').innerHTML = `
+    <div class="detail-head">
       <div>
-        <p class="eyebrow">TODAY'S RECIPE</p>
+        <p class="eyebrow">EASY RECIPE</p>
         <h2>${recipe.emoji} ${recipe.name}</h2>
-        <p>${recipe.time} · Base recipe serves ${recipe.servings}</p>
+        <p>Ready in ${recipe.time} · Base recipe serves ${recipe.servings}</p>
       </div>
-      <button id="closeDetail" class="close-detail">Close</button>
+      <button id="closeRecipe" class="clear">Close</button>
     </div>
 
     <div class="detail-grid">
-      <div>
-        <div class="serving-box">
-          <h3>Serving-size calculator</h3>
-          <p>Cooking for more people? Change the number below.</p>
+      <div class="box">
+        <h3>Ingredients</h3>
 
-          <div class="serving-control">
-            <label>
-              Servings
-              <input id="servingCount" type="number" min="1" value="${recipe.servings}">
-            </label>
-            <b id="multiplier">1× recipe</b>
-          </div>
+        <div class="servings">
+          <label>
+            Cooking for:
+            <input id="servings" type="number" min="1" value="${recipe.servings}">
+          </label>
+          <b id="servingText">1× recipe</b>
         </div>
 
-        <div class="ingredients-box">
-          <h3>Ingredients</h3>
-          <ul id="ingredientList"></ul>
-          <button id="addAllShopping">＋ Add all to shopping list</button>
-        </div>
+        <div id="ingredients" class="ingredients"></div>
+
+        <button id="addAll">Add all to shopping list</button>
       </div>
 
-      <div class="steps-box">
-        <h3>Easy cooking steps</h3>
-        <ol>
+      <div class="box">
+        <h3>How to cook</h3>
+        <ol class="steps">
           ${recipe.steps.map((step) => `<li>${step}</li>`).join('')}
         </ol>
-
-        <button id="addToPlan">📅 Add to weekly plan</button>
-        <button id="detailFavourite" class="soft-button">
-          ${saved ? '♥ Saved to favourites' : '♡ Save favourite'}
-        </button>
       </div>
     </div>
   `;
 
   function renderIngredients() {
-    const servings = Math.max(1, Number($('servingCount').value) || recipe.servings);
-    const multiplier = servings / recipe.servings;
+    const wantedServings = Math.max(
+      1,
+      Number($('servings').value) || recipe.servings
+    );
 
-    $('multiplier').textContent =
-      `${multiplier.toFixed(2).replace(/\.00$/, '')}× recipe`;
+    const multiplier = wantedServings / recipe.servings;
 
-    $('ingredientList').innerHTML = recipe.ingredients
+    $('servingText').textContent =
+      `${multiplier.toFixed(2).replace('.00', '')}× recipe`;
+
+    $('ingredients').innerHTML = recipe.ingredients
       .map(
         (ingredient, index) => `
-          <li class="ingredient-row">
-            <span>${scaledIngredient(ingredient, multiplier)}</span>
-            <button class="add-item" data-ingredient="${index}">Add</button>
-          </li>
+          <div class="ingredient">
+            <span>${multiplier === 1 ? ingredient : `${multiplier.toFixed(2).replace('.00', '')}× ${ingredient}`}</span>
+            <button class="add-one" data-ingredient="${index}">Add</button>
+          </div>
         `
       )
       .join('');
@@ -333,63 +276,48 @@ function renderDetail() {
 
   renderIngredients();
 
-  $('servingCount').addEventListener('input', renderIngredients);
+  $('servings').addEventListener('input', renderIngredients);
 
-  $('ingredientList').addEventListener('click', (event) => {
+  $('ingredients').addEventListener('click', (event) => {
     const button = event.target.closest('[data-ingredient]');
     if (!button) return;
 
-    const index = Number(button.dataset.ingredient);
-    addShoppingItem(recipe.ingredients[index]);
+    const ingredient = recipe.ingredients[Number(button.dataset.ingredient)];
+    addToShopping(ingredient);
   });
 
-  $('addAllShopping').addEventListener('click', () => {
-    recipe.ingredients.forEach(addShoppingItem);
+  $('addAll').addEventListener('click', () => {
+    recipe.ingredients.forEach(addToShopping);
   });
 
-  $('addToPlan').addEventListener('click', () => {
-    addToPlan(recipe);
+  $('closeRecipe').addEventListener('click', () => {
+    selectedRecipe = null;
+    $('recipeDetail').classList.add('hidden');
   });
 
-  $('detailFavourite').addEventListener('click', () => {
-    toggleFavourite(recipe.id);
-  });
-
-  $('closeDetail').addEventListener('click', () => {
-    activeRecipe = null;
-    renderDetail();
+  $('recipeDetail').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
   });
 }
 
-function toggleFavourite(id) {
-  if (state.favourites.includes(id)) {
-    state.favourites = state.favourites.filter((recipeId) => recipeId !== id);
-  } else {
-    state.favourites.push(id);
-  }
-
-  save();
-  renderRecipes();
-  renderDetail();
-}
-
-function addShoppingItem(item) {
-  if (!state.shopping.includes(item)) {
-    state.shopping.push(item);
-    save();
+function addToShopping(item) {
+  if (!shopping.includes(item)) {
+    shopping.push(item);
+    saveShopping();
   }
 
   renderShopping();
 }
 
 function renderShopping() {
-  $('shoppingList').innerHTML = state.shopping.length
-    ? state.shopping
+  $('shoppingList').innerHTML = shopping.length
+    ? shopping
         .map(
           (item, index) => `
-            <div class="shopping-row">
-              <span>🛒 ${escapeHtml(item)}</span>
-              <button class="remove" data-remove-shopping="${index}">×</button>
+            <div class="shop-item">
+              <span>🛒 ${item}</span>
+              <button class="remove" data-remove="${index}">×</button>
             </div>
           `
         )
@@ -397,103 +325,38 @@ function renderShopping() {
     : '<p class="empty">Your shopping list is empty.</p>';
 }
 
-function addToPlan(recipe) {
-  const days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-  ];
-
-  const day = days[state.nextDay % days.length];
-
-  state.plan.push({
-    id: crypto.randomUUID(),
-    day,
-    recipeId: recipe.id
-  });
-
-  state.nextDay += 1;
-  save();
-  renderPlan();
-}
-
-function renderPlan() {
-  $('mealPlan').innerHTML = state.plan.length
-    ? state.plan
-        .map((item) => {
-          const recipe = findRecipe(item.recipeId);
-
-          if (!recipe) return '';
-
-          return `
-            <div class="plan-row">
-              <span>
-                <b>${item.day}</b>
-                <small>${recipe.emoji} ${recipe.name}</small>
-              </span>
-              <button class="remove" data-remove-plan="${item.id}">×</button>
-            </div>
-          `;
-        })
-        .join('')
-    : '<p class="empty">Open a recipe and add it to your weekly plan.</p>';
-}
-
 $('search').addEventListener('input', renderRecipes);
-$('filter').addEventListener('change', renderRecipes);
 
-$('showFavorites').addEventListener('click', () => {
-  favouritesOnly = !favouritesOnly;
+$('clearSearch').addEventListener('click', () => {
+  $('search').value = '';
   renderRecipes();
 });
 
-$('recipes').addEventListener('click', (event) => {
-  const openButton = event.target.closest('[data-open]');
-  const favouriteButton = event.target.closest('[data-favourite]');
+$('recipeList').addEventListener('click', (event) => {
+  const button = event.target.closest('[data-recipe]');
+  if (!button) return;
 
-  if (openButton) {
-    activeRecipe = findRecipe(openButton.dataset.open);
-    renderDetail();
-    $('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const recipe = recipes.find(
+    (item) => item.id === Number(button.dataset.recipe)
+  );
 
-  if (favouriteButton) {
-    toggleFavourite(favouriteButton.dataset.favourite);
-  }
+  if (recipe) showRecipe(recipe);
 });
 
 $('shoppingList').addEventListener('click', (event) => {
-  const button = event.target.closest('[data-remove-shopping]');
+  const button = event.target.closest('[data-remove]');
   if (!button) return;
 
-  state.shopping.splice(Number(button.dataset.removeShopping), 1);
-  save();
+  shopping.splice(Number(button.dataset.remove), 1);
+  saveShopping();
   renderShopping();
 });
 
-$('mealPlan').addEventListener('click', (event) => {
-  const button = event.target.closest('[data-remove-plan]');
-  if (!button) return;
-
-  state.plan = state.plan.filter((item) => item.id !== button.dataset.removePlan);
-  save();
-  renderPlan();
-});
-
 $('clearShopping').addEventListener('click', () => {
-  if (!state.shopping.length) return;
-
-  if (confirm('Clear your shopping list?')) {
-    state.shopping = [];
-    save();
-    renderShopping();
-  }
+  shopping = [];
+  saveShopping();
+  renderShopping();
 });
 
 renderRecipes();
 renderShopping();
-renderPlan();
