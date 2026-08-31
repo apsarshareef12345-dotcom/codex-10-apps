@@ -1,64 +1,121 @@
-const storageKey = 'pomo.state';
+const STORAGE_KEY = 'focus-galaxy-state-v1';
 
-const modeLabel = document.getElementById('mode');
-const clock = document.getElementById('clock');
-const startButton = document.getElementById('start');
-const resetButton = document.getElementById('reset');
-const workInput = document.getElementById('work');
-const breakInput = document.getElementById('break');
-const sessionsValue = document.getElementById('sessions');
-const logElement = document.getElementById('log');
+const $ = (id) => document.getElementById(id);
 
-let state = JSON.parse(
-  localStorage.getItem(storageKey) ||
-    '{"work":25,"break":5,"done":0,"logs":[]}'
-);
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-let currentMode = 'focus';
+    if (saved) {
+      return {
+        work: Number(saved.work) || 25,
+        break: Number(saved.break) || 5,
+        done: Number(saved.done) || 0,
+        logs: Array.isArray(saved.logs) ? saved.logs : []
+      };
+    }
+  } catch (error) {
+    console.warn('Could not load timer data.', error);
+  }
+
+  return {
+    work: 25,
+    break: 5,
+    done: 0,
+    logs: []
+  };
+}
+
+let state = loadState();
+let mode = 'focus';
 let remaining = state.work * 60;
 let running = false;
 let timerId = null;
 
 function save() {
-  localStorage.setItem(storageKey, JSON.stringify(state));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function displayTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secondsLeft = seconds % 60;
+
+  return `${minutes}:${String(secondsLeft).padStart(2, '0')}`;
 }
 
 function render() {
-  const minutes = Math.floor(remaining / 60);
-  const seconds = remaining % 60;
+  $('clock').textContent = displayTime(remaining);
 
-  clock.textContent = minutes + ':' + String(seconds).padStart(2, '0');
-  modeLabel.textContent = currentMode === 'focus' ? 'Focus time' : 'Break time';
-  sessionsValue.textContent = state.done;
-  startButton.textContent = running ? 'Pause' : 'Start';
+  $('mode').textContent =
+    mode === 'focus'
+      ? 'Focus time'
+      : 'Break time — you earned it!';
 
-  logElement.innerHTML =
-    state.logs
-      .slice(0, 8)
-      .map(item => '<p class="muted">' + item + '</p>')
-      .join('') ||
-    '<p class="muted">No completed focus sessions yet.</p>';
+  $('start').textContent =
+    running
+      ? 'Pause'
+      : mode === 'focus'
+        ? 'Start focus'
+        : 'Start break';
+
+  $('sessions').textContent = state.done;
+  $('work').value = state.work;
+  $('break').value = state.break;
+
+  $('log').innerHTML = state.logs.length
+    ? state.logs
+        .slice(0, 10)
+        .map((entry) => `<p>${entry}</p>`)
+        .join('')
+    : '<p>Your completed focus missions will appear here.</p>';
 }
 
 function playAlert() {
-  if (navigator.vibrate) {
-    navigator.vibrate([120, 70, 120]);
+  try {
+    const context = new AudioContext();
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+
+    oscillator.frequency.value = 880;
+    gain.gain.setValueAtTime(0.1, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      context.currentTime + 0.35
+    );
+
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.35);
+  } catch (error) {
+    // Timer still works if the browser blocks sound.
   }
 }
 
-function finishRound() {
+function stopTimer() {
+  clearInterval(timerId);
+  timerId = null;
+  running = false;
+}
+
+function completeRound() {
+  stopTimer();
   playAlert();
 
-  if (currentMode === 'focus') {
-    state.done++;
+  if (mode === 'focus') {
+    state.done += 1;
+
     state.logs.unshift(
-      new Date().toLocaleString() + ' — focus session complete'
+      `${new Date().toLocaleString()} — focus session complete`
     );
 
-    currentMode = 'break';
+    state.logs = state.logs.slice(0, 20);
+
+    mode = 'break';
     remaining = state.break * 60;
   } else {
-    currentMode = 'focus';
+    mode = 'focus';
     remaining = state.work * 60;
   }
 
@@ -68,54 +125,52 @@ function finishRound() {
 
 function tick() {
   if (remaining <= 1) {
-    clearInterval(timerId);
-    timerId = null;
-    running = false;
-    finishRound();
-    return;
+    completeRound();
+  } else {
+    remaining -= 1;
+    render();
   }
-
-  remaining--;
-  render();
 }
 
-startButton.onclick = () => {
-  running = !running;
-
+$('start').addEventListener('click', () => {
   if (running) {
-    timerId = setInterval(tick, 1000);
+    stopTimer();
   } else {
-    clearInterval(timerId);
-    timerId = null;
+    running = true;
+    timerId = setInterval(tick, 1000);
   }
 
   render();
-};
+});
 
-resetButton.onclick = () => {
-  clearInterval(timerId);
-  timerId = null;
-  running = false;
-  currentMode = 'focus';
+$('reset').addEventListener('click', () => {
+  stopTimer();
+  mode = 'focus';
   remaining = state.work * 60;
   render();
-};
+});
 
-function saveSettings() {
-  state.work = Math.max(1, Number(workInput.value) || 25);
-  state.break = Math.max(1, Number(breakInput.value) || 5);
+function updateSettings() {
+  state.work = Math.min(90, Math.max(1, Number($('work').value) || 25));
+  state.break = Math.min(60, Math.max(1, Number($('break').value) || 5));
 
   save();
 
   if (!running) {
-    resetButton.click();
+    mode = 'focus';
+    remaining = state.work * 60;
   }
+
+  render();
 }
 
-workInput.value = state.work;
-breakInput.value = state.break;
+$('work').addEventListener('change', updateSettings);
+$('break').addEventListener('change', updateSettings);
 
-workInput.onchange = saveSettings;
-breakInput.onchange = saveSettings;
+$('clearLog').addEventListener('click', () => {
+  state.logs = [];
+  save();
+  render();
+});
 
 render();
