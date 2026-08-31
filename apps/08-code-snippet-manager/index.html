@@ -1,1 +1,105 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Snippet Manager</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Code Snippet Manager</h1></header><main class="wrap"><form id="form" class="card"><div class="row"><input id="title" required placeholder="Snippet title"><select id="lang"><option>JavaScript</option><option>HTML</option><option>CSS</option><option>Python</option><option>SQL</option></select></div><p><textarea id="code" required placeholder="Paste your code here"></textarea></p><button>Save snippet</button></form><div id="list" class="grid" style="margin-top:18px"></div></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Code City Snippets</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="city-lights" aria-hidden="true"></div>
+
+  <aside class="sidebar">
+    <a href="../../index.html" class="logo">⌘</a>
+
+    <nav>
+      <a class="active">⌂ <span>My code</span></a>
+      <a href="#addSnippet">＋ <span>New snippet</span></a>
+      <a href="#snippets">▣ <span>Saved ideas</span></a>
+    </nav>
+
+    <a href="../../index.html" class="back">← App hub</a>
+  </aside>
+
+  <main class="app">
+    <header>
+      <div>
+        <p class="eyebrow">CODE CITY</p>
+        <h1>Save tiny ideas. Build amazing things.</h1>
+        <p>Keep your code safe, easy to find, and ready to copy.</p>
+      </div>
+      <div class="robot" aria-hidden="true">🤖</div>
+    </header>
+
+    <section class="search-card">
+      <input id="search" placeholder="Search your code ideas…">
+      <button id="showStarter">✨ Starter examples</button>
+    </section>
+
+    <section id="addSnippet" class="add-card">
+      <div class="card-heading">
+        <div>
+          <p class="eyebrow">NEW CODE IDEA</p>
+          <h2>Add a snippet</h2>
+        </div>
+        <span>⌨</span>
+      </div>
+
+      <form id="snippetForm">
+        <input id="title" required maxlength="50" placeholder="Name it, e.g. Rainbow button">
+
+        <div class="form-row">
+          <select id="language">
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+          </select>
+
+          <button type="button" id="loadExample" class="soft-button">
+            Load example
+          </button>
+        </div>
+
+        <textarea
+          id="code"
+          required
+          spellcheck="false"
+          placeholder="Write or paste your code here…"
+        ></textarea>
+
+        <button type="submit">Save my code</button>
+      </form>
+    </section>
+
+    <section class="content-grid">
+      <section id="snippets" class="snippet-card">
+        <div class="card-heading">
+          <div>
+            <p class="eyebrow">MY COLLECTION</p>
+            <h2>Saved code ideas</h2>
+          </div>
+          <span id="snippetCount"></span>
+        </div>
+
+        <div id="snippetList" class="snippet-list"></div>
+      </section>
+
+      <aside class="recent-card">
+        <p class="eyebrow">RECENTLY OPENED</p>
+        <h2>Quick pick</h2>
+        <div id="recentList"></div>
+
+        <div class="tip">
+          <span>💡</span>
+          <p>
+            Click <b>Copy</b>, then paste your code into a file or coding website.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
