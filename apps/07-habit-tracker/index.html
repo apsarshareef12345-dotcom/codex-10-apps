@@ -1,1 +1,75 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Habit Tracker</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Habit Tracker</h1></header><main class="wrap"><form id="form" class="card row"><input id="habit" required placeholder="Add a habit, e.g. Walk 20 minutes"><button>Add habit</button></form><section class="card matrix" style="margin-top:18px"><table id="table" class="table"></table></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>21-Day Habit Quest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main class="app">
+    <a href="../../index.html" class="back">← Back to app hub</a>
+
+    <header>
+      <p class="eyebrow">HABIT QUEST</p>
+      <h1>Your 21-day growth journey</h1>
+      <p>
+        Tick one small win every day. Twenty-one small wins can create
+        one strong habit.
+      </p>
+    </header>
+
+    <section class="progress-card">
+      <div>
+        <span>Challenge progress</span>
+        <b id="progressText">0 of 21 days completed</b>
+      </div>
+      <div class="progress-track">
+        <i id="progressBar"></i>
+      </div>
+    </section>
+
+    <form id="habitForm" class="add-card">
+      <input
+        id="habitInput"
+        required
+        maxlength="45"
+        placeholder="Add a habit, for example: Drink water"
+      >
+      <button>Add habit</button>
+    </form>
+
+    <section class="tracker-card">
+      <div class="tracker-heading">
+        <div>
+          <p class="eyebrow">YOUR DAILY TICKS</p>
+          <h2>21-day habit tracker</h2>
+        </div>
+        <span>✓ = completed</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead id="dayLabels"></thead>
+          <tbody id="habitRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="help-card">
+      <span>💡</span>
+      <div>
+        <h2>How to use it</h2>
+        <p>
+          Add a habit. When you complete it, click that day’s square.
+          Your progress saves automatically in your browser.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
