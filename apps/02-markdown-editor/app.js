@@ -1,4 +1,5 @@
 const storageKey = 'superone-markdown';
+const historyKey = 'superone-note-history';
 
 const source = document.getElementById('source');
 const preview = document.getElementById('preview');
@@ -6,6 +7,8 @@ const sampleButton = document.getElementById('sampleButton');
 const downloadButton = document.getElementById('downloadButton');
 const editorStatus = document.getElementById('editorStatus');
 const previewStatus = document.getElementById('previewStatus');
+const historyList = document.getElementById('historyList');
+const clearHistoryButton = document.getElementById('clearHistoryButton');
 
 const example =
   '# Welcome\n\n' +
@@ -17,6 +20,12 @@ const example =
   'Small steps create big things.';
 
 source.value = localStorage.getItem(storageKey) || example;
+
+let history = JSON.parse(
+  localStorage.getItem(historyKey) || '[]'
+);
+
+let historyTimer = null;
 
 function escapeHtml(text) {
   return text
@@ -64,14 +73,94 @@ function render() {
   previewStatus.textContent = '✓ Live preview';
 }
 
+function getTitle(text) {
+  const firstLine = text.split('\n').find(line => line.trim());
+
+  return (firstLine || 'Untitled note')
+    .replace(/^#+\s*/, '')
+    .slice(0, 28);
+}
+
+function saveHistory() {
+  const content = source.value.trim();
+
+  if (!content) return;
+
+  if (history[0] && history[0].content === content) {
+    return;
+  }
+
+  history.unshift({
+    id: Date.now(),
+    title: getTitle(content),
+    content: content,
+    savedAt: new Date().toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  });
+
+  history = history.slice(0, 8);
+
+  localStorage.setItem(historyKey, JSON.stringify(history));
+
+  renderHistory();
+}
+
+function renderHistory() {
+  if (history.length === 0) {
+    historyList.innerHTML =
+      '<span class="history-empty">Your saved notes will appear here.</span>';
+    return;
+  }
+
+  historyList.innerHTML = history
+    .map(
+      item =>
+        '<button class="history-item" data-id="' +
+        item.id +
+        '">' +
+        '<b>' +
+        escapeHtml(item.title) +
+        '</b>' +
+        '<small>' +
+        item.savedAt +
+        '</small>' +
+        '</button>'
+    )
+    .join('');
+
+  document.querySelectorAll('.history-item').forEach(button => {
+    button.onclick = () => {
+      const oldNote = history.find(
+        item => String(item.id) === button.dataset.id
+      );
+
+      if (!oldNote) return;
+
+      source.value = oldNote.content;
+      render();
+      source.focus();
+    };
+  });
+}
+
 source.addEventListener('input', () => {
   editorStatus.textContent = 'Saving...';
+
   render();
+
+  clearTimeout(historyTimer);
+
+  historyTimer = setTimeout(() => {
+    saveHistory();
+  }, 900);
 });
 
 sampleButton.onclick = () => {
   source.value = example;
   render();
+  saveHistory();
   source.focus();
 };
 
@@ -95,4 +184,11 @@ downloadButton.onclick = () => {
   }, 1000);
 };
 
+clearHistoryButton.onclick = () => {
+  history = [];
+  localStorage.removeItem(historyKey);
+  renderHistory();
+};
+
 render();
+renderHistory();
