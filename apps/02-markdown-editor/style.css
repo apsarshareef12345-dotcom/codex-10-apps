@@ -381,4 +381,91 @@ button:hover {
   .preview {
     height: 380px;
   }
+  /* Make space for note history */
+.preview {
+  height: 300px;
+}
+
+/* Recent notes section */
+.history-panel {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #ffffff1c;
+}
+
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #eef0ff;
+  font-size: 12px;
+}
+
+.history-head > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.history-dot {
+  color: #7fdfff;
+  font-size: 16px;
+}
+
+.clear-history {
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #ffffff12;
+  color: #c7ceff;
+  box-shadow: none;
+  font-size: 10px;
+}
+
+.history-list {
+  display: flex;
+  gap: 7px;
+  min-height: 57px;
+  margin-top: 8px;
+  overflow-x: auto;
+}
+
+.history-item {
+  min-width: 115px;
+  max-width: 150px;
+  padding: 8px;
+  border: 1px solid #ffffff1b;
+  border-radius: 8px;
+  background: #1f2851;
+  color: #eef1ff;
+  text-align: left;
+  box-shadow: none;
+}
+
+.history-item:hover {
+  border-color: #7f78e8;
+}
+
+.history-item b,
+.history-item small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-item b {
+  font-size: 11px;
+}
+
+.history-item small {
+  margin-top: 2px;
+  color: #aeb8e9;
+  font: 10px "Nunito", Arial, sans-serif;
+}
+
+.history-empty {
+  padding: 10px 2px;
+  color: #aeb8e9;
+  font-size: 12px;
+}
 }
