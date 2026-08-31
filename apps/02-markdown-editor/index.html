@@ -1,1 +1,83 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Markdown Editor</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Markdown Editor</h1></header><main class="wrap"><div class="row"><button id="export">Download .md</button><button class="ghost" id="sample">Load example</button></div><section class="grid editor" style="margin-top:18px"><div class="card"><label><b>Markdown</b><textarea id="source" aria-label="Markdown input"></textarea></label></div><article id="preview" class="card preview"></article></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SuperOne Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="network" aria-hidden="true">
+    <i></i><i></i><i></i><i></i>
+  </div>
+
+  <main class="app-shell">
+    <header class="app-header">
+      <div class="left-actions">
+        <button id="downloadButton" class="primary">Download .md</button>
+        <button id="sampleButton" class="secondary">Load example</button>
+      </div>
+
+      <a class="brand" href="../../index.html">
+        <span>✦</span> SuperOne Notes
+      </a>
+
+      <div class="header-icons">
+        <button>◉</button>
+        <button>⌕</button>
+        <button>♙</button>
+      </div>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">YOUR CREATIVE SPACE</p>
+      <h1>Ideas become awesome notes.</h1>
+      <p>Write on the left and watch your note come alive on the right.</p>
+    </section>
+
+    <section class="workspace">
+      <article class="editor-panel panel">
+        <div class="panel-head">
+          <div>
+            <span class="dot purple"></span>
+            <b>Markdown Editor</b>
+          </div>
+
+          <span id="editorStatus" class="saved">✓ Draft saved</span>
+        </div>
+
+        <div class="editor-wrap">
+          <textarea
+            id="source"
+            spellcheck="true"
+            placeholder="Start writing your idea..."
+          ></textarea>
+          <span class="code-icon">⌘</span>
+        </div>
+
+        <p class="hint">
+          Try: <code># Title</code>
+          <code>**bold**</code>
+          <code>- list</code>
+        </p>
+      </article>
+
+      <article class="preview-panel panel">
+        <div class="panel-head">
+          <div>
+            <span class="dot blue"></span>
+            <b>Rendered Preview</b>
+          </div>
+
+          <span id="previewStatus" class="saved">✓ Live preview</span>
+        </div>
+
+        <article id="preview" class="preview"></article>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
