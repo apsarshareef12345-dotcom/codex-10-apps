@@ -3,103 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Yum Quest Recipe Adventure</title>
+  <title>Quick Cook</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="sparkles" aria-hidden="true"></div>
+  <main class="app">
+    <a href="../../index.html" class="back">← Back to app hub</a>
 
-  <main class="app-shell">
     <header class="hero">
-      <a class="hub-link" href="../../index.html">← Back to app hub</a>
-
-      <div class="hero-copy">
-        <p class="eyebrow">YUM QUEST</p>
-        <h1>Cook, plan, and make every meal an adventure.</h1>
-        <p>
-          Find easy recipes, change serving sizes, save favourites,
-          and build your shopping list.
-        </p>
+      <div>
+        <p>QUICK COOK</p>
+        <h1>What can we cook today?</h1>
+        <span>Choose a recipe, get ingredients, and cook it fast.</span>
       </div>
-
-      <div class="mascot" aria-hidden="true">🍳</div>
+      <div class="food-art">🍳</div>
     </header>
 
-    <section class="search-card">
-      <label class="search-box">
-        <span>⌕</span>
-        <input id="search" placeholder="Search a recipe or ingredient…">
-      </label>
-
-      <select id="filter">
-        <option value="">All recipe types</option>
-        <option value="Quick">Quick meals</option>
-        <option value="Vegetarian">Vegetarian</option>
-        <option value="Indian">Indian</option>
-        <option value="Italian">Italian</option>
-        <option value="Mexican">Mexican</option>
-        <option value="Asian">Asian</option>
-      </select>
-
-      <button id="showFavorites" class="soft-button">♡ My favourites</button>
+    <section class="search-area">
+      <input id="search" placeholder="Try: bread, tomato, pasta, noodles…">
+      <button id="clearSearch">Show all recipes</button>
     </section>
 
-    <section class="feature-grid">
-      <article class="mini-feature">
-        <span>01</span>
-        <h2>Find a tasty recipe</h2>
-        <p>Search by food name or ingredients you already have at home.</p>
-      </article>
-
-      <article class="mini-feature">
-        <span>02</span>
-        <h2>Plan your week</h2>
-        <p>Save meals for later and make cooking feel easier every day.</p>
-      </article>
-
-      <article class="mini-feature">
-        <span>03</span>
-        <h2>Build your shopping list</h2>
-        <p>Add ingredients with one click, so nothing important is forgotten.</p>
-      </article>
-    </section>
-
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">RECIPE COLLECTION</p>
-        <h2>Pick your next yummy mission</h2>
+    <section>
+      <div class="title-row">
+        <div>
+          <p>QUICK RECIPES</p>
+          <h2>Pick something yummy</h2>
+        </div>
+        <span id="count"></span>
       </div>
-      <span id="recipeCount"></span>
-    </div>
 
-    <section id="recipes" class="recipe-grid"></section>
+      <div id="recipeList" class="recipe-list"></div>
+    </section>
 
-    <section id="detail" class="recipe-detail hidden"></section>
+    <section id="recipeDetail" class="detail hidden"></section>
 
-    <section class="bottom-grid">
-      <section class="side-card">
-        <div class="card-title">
-          <div>
-            <p class="eyebrow">SAVED FOR LATER</p>
-            <h2>Weekly meal plan</h2>
-          </div>
-          <span>📅</span>
+    <section class="shopping-card">
+      <div class="title-row">
+        <div>
+          <p>SHOPPING LIST</p>
+          <h2>Things to buy</h2>
         </div>
+        <button id="clearShopping" class="clear">Clear list</button>
+      </div>
 
-        <div id="mealPlan" class="meal-plan"></div>
-      </section>
-
-      <section class="side-card">
-        <div class="card-title">
-          <div>
-            <p class="eyebrow">READY TO SHOP</p>
-            <h2>Shopping list</h2>
-          </div>
-          <button id="clearShopping" class="text-button">Clear</button>
-        </div>
-
-        <div id="shoppingList" class="shopping-list"></div>
-      </section>
+      <div id="shoppingList"></div>
     </section>
   </main>
 
