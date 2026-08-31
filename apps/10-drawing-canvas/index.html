@@ -1,1 +1,97 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Drawing Canvas</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>HTML5 Drawing Canvas</h1></header><main class="wrap" style="max-width:1000px"><div class="card row toolbar"><label>Color <input id="color" type="color" value="#5b56e8"></label><label>Brush size <input id="size" type="range" min="1" max="40" value="6"></label><button class="ghost" id="undo">Undo</button><button class="ghost" id="redo">Redo</button><button class="danger" id="clear">Clear</button><button id="download">Download PNG</button></div><p class="muted">Draw with mouse, finger, or pen. Your latest canvas is saved automatically.</p><canvas id="canvas" width="1200" height="700"></canvas></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Creative Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <a href="../../index.html" class="back">← Back to app hub</a>
+
+      <div class="brand">
+        <span>🖌️</span>
+        <div>
+          <p>CREATIVE STUDIO</p>
+          <h1>Draw your big ideas.</h1>
+        </div>
+      </div>
+
+      <span id="saveStatus" class="save-status">● Ready to draw</span>
+    </header>
+
+    <section class="studio">
+      <aside class="tools">
+        <div class="tool-block">
+          <p class="label">COLOURS</p>
+
+          <div class="colors">
+            <button class="color active" data-color="#6f4daa" style="--color:#6f4daa" aria-label="Purple"></button>
+            <button class="color" data-color="#e75480" style="--color:#e75480" aria-label="Pink"></button>
+            <button class="color" data-color="#ef6f4d" style="--color:#ef6f4d" aria-label="Orange"></button>
+            <button class="color" data-color="#f4bf4f" style="--color:#f4bf4f" aria-label="Yellow"></button>
+            <button class="color" data-color="#36a77e" style="--color:#36a77e" aria-label="Green"></button>
+            <button class="color" data-color="#3b9fc7" style="--color:#3b9fc7" aria-label="Blue"></button>
+            <button class="color" data-color="#432d25" style="--color:#432d25" aria-label="Brown"></button>
+            <button class="color" data-color="#18202c" style="--color:#18202c" aria-label="Black"></button>
+          </div>
+        </div>
+
+        <div class="tool-block">
+          <p class="label">DRAWING TOOL</p>
+
+          <div class="tool-buttons">
+            <button class="tool active" data-tool="pencil">✏️ <span>Pencil</span></button>
+            <button class="tool" data-tool="marker">🖍️ <span>Marker</span></button>
+            <button class="tool" data-tool="brush">🖌️ <span>Brush</span></button>
+            <button class="tool" data-tool="eraser">🧼 <span>Eraser</span></button>
+          </div>
+        </div>
+
+        <div class="tool-block">
+          <label class="range-label">
+            Brush size
+            <b id="sizeValue">10 px</b>
+          </label>
+          <input id="size" type="range" min="2" max="45" value="10">
+
+          <label class="range-label">
+            Opacity
+            <b id="opacityValue">100%</b>
+          </label>
+          <input id="opacity" type="range" min="10" max="100" value="100">
+        </div>
+      </aside>
+
+      <section class="canvas-area">
+        <div class="toolbar">
+          <button id="undo" class="icon-button" title="Undo">↶ <span>Undo</span></button>
+          <button id="redo" class="icon-button" title="Redo">↷ <span>Redo</span></button>
+          <button id="clear" class="icon-button danger" title="Clear drawing">🗑 <span>Clear</span></button>
+          <div class="toolbar-space"></div>
+          <button id="download" class="download">↓ Download PNG</button>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="canvas" width="1000" height="650"></canvas>
+
+          <div id="canvasHint" class="canvas-hint">
+            <span>✨</span>
+            <b>Your canvas is ready</b>
+            <small>Choose a colour, then draw something awesome.</small>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer>
+      <span>Tip: You can use your mouse, trackpad, or finger.</span>
+      <span>Your drawing saves in this browser.</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
