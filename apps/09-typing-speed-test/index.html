@@ -1,1 +1,106 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Typing Speed Test</title><link rel="stylesheet" href="style.css"></head><body><header class="top"><a href="../../">← Hub</a><h1>Typing Speed Test</h1></header><main class="wrap" style="max-width:900px"><div class="card"><p id="passage" class="passage"></p><textarea id="input" placeholder="Start typing here…" aria-label="Typing input"></textarea><p><button class="ghost" id="new">New passage</button></p></div><section class="grid scores" style="margin-top:18px"><div class="card"><span class="muted">WPM</span><div id="wpm" class="score">0</div></div><div class="card"><span class="muted">Accuracy</span><div id="accuracy" class="score">100%</div></div><div class="card"><span class="muted">Time</span><div id="time" class="score">0s</div></div></section></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Typing Quest</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="lights" aria-hidden="true"></div>
+
+  <main class="app">
+    <a href="../../index.html" class="back">← Back to app hub</a>
+
+    <header>
+      <p class="eyebrow">TYPING QUEST</p>
+      <h1>Type fast. Learn. Earn stars!</h1>
+      <p>Pick a level, copy the sentence, and become a keyboard hero.</p>
+    </header>
+
+    <section class="game-card">
+      <div class="game-top">
+        <h2>⌨️ Typing challenge</h2>
+
+        <label>
+          Level
+          <select id="level">
+            <option value="easy">Easy words</option>
+            <option value="medium">Fun sentences</option>
+            <option value="hard">Keyboard hero</option>
+          </select>
+        </label>
+      </div>
+
+      <section class="score-grid">
+        <article class="score errors">
+          <span>Oops!</span>
+          <b id="errors">0</b>
+          <small>mistakes</small>
+        </article>
+
+        <article class="score time">
+          <span>Time</span>
+          <b id="time">0</b>
+          <small>seconds</small>
+        </article>
+
+        <article class="score accuracy">
+          <span>Accuracy</span>
+          <b id="accuracy">100</b>
+          <small>percent</small>
+        </article>
+
+        <article class="score stars">
+          <span>Stars</span>
+          <b id="stars">0</b>
+          <small>earned</small>
+        </article>
+      </section>
+
+      <div id="sentence" class="sentence">
+        Click Start to get your first sentence!
+      </div>
+
+      <textarea
+        id="typingBox"
+        disabled
+        spellcheck="false"
+        autocomplete="off"
+        placeholder="Your typing will appear here…"
+      ></textarea>
+
+      <div class="game-buttons">
+        <button id="start">Start game</button>
+        <button id="newSentence" class="secondary">New sentence</button>
+      </div>
+
+      <p id="message" class="message">
+        Ready for a typing adventure?
+      </p>
+    </section>
+
+    <section class="tips">
+      <article>
+        <span>👀</span>
+        <h2>Look carefully</h2>
+        <p>Read the whole sentence first.</p>
+      </article>
+
+      <article>
+        <span>🐢</span>
+        <h2>Go slowly</h2>
+        <p>Correct typing is more important than fast typing.</p>
+      </article>
+
+      <article>
+        <span>⭐</span>
+        <h2>Try again</h2>
+        <p>Every game helps your fingers learn.</p>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
